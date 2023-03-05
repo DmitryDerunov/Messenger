@@ -22,12 +22,12 @@ abstract class UseCase<out Type, in Params> {
 
     abstract suspend fun run(params: Params): Either<Failure, Type>
 
-    operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}){
+    operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
         unsubscribe()
         parentJob = Job()
 
         CoroutineScope(foregroundContext + parentJob).launch {
-            val result = withContext(backgroundContext){
+            val result = withContext(backgroundContext) {
                 run(params)
             }
 
@@ -35,7 +35,7 @@ abstract class UseCase<out Type, in Params> {
         }
     }
 
-    private fun unsubscribe() {
+    fun unsubscribe() {
         parentJob.apply {
             cancelChildren()
             cancel()

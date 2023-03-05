@@ -13,7 +13,7 @@ class Request @Inject constructor(private val networkHandler: NetworkHandler) {
     fun <T : BaseResponse, R> make(call: Call<T>, transform: (T) -> R): Either<Failure, R> {
         return when (networkHandler.isConnected) {
             true -> execute(call, transform)
-            false, null -> Either.Left(Failure.NetworkConnectionError)
+            false -> Either.Left(Failure.NetworkConnectionError)
         }
     }
 
@@ -32,4 +32,11 @@ class Request @Inject constructor(private val networkHandler: NetworkHandler) {
 
 fun <T : BaseResponse> Response<T>.isSucceed(): Boolean {
     return isSuccessful && body() != null && (body() as BaseResponse).success == 1
+}
+
+fun <T : BaseResponse> Response<T>.parseError(): Failure {
+    return when ((body() as BaseResponse).message) {
+        "email already exists" -> Failure.EmailAlreadyExistError
+        else -> Failure.ServerError
+    }
 }

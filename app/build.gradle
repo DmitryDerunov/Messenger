@@ -2,19 +2,25 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android'
     id "kotlin-kapt"
     id "kotlin-android-extensions"
     id("androidx.navigation.safeargs")
 }
 
+androidExtensions {
+    experimental = true
+    features = ["parcelize"]
+}
+
 android {
     namespace 'com.messenger'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.messenger"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -38,6 +44,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    kapt {
+        generateStubs = true
+    }
 }
 
 ext {
@@ -54,8 +64,8 @@ ext {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
 
 
     // Import the Firebase BoM
@@ -76,12 +86,15 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
 
     //dagger
-    implementation 'com.google.dagger:dagger:2.x'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.x'
-    implementation 'com.google.dagger:dagger-android:2.x'
-    implementation 'com.google.dagger:dagger-android-support:2.x'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.x'
+    implementation 'com.google.dagger:dagger:2.40.5'
+    kapt 'com.google.dagger:dagger-compiler:2.40.5'
+    implementation 'com.google.dagger:dagger-android:2.40.5'
+    implementation 'com.google.dagger:dagger-android-support:2.40.5'
+    kapt 'com.google.dagger:dagger-android-processor:2.40.5'
+
+    //firebase
     implementation 'com.google.firebase:firebase-messaging:23.1.1'
+
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"

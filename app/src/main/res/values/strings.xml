@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Messenger</string>
+
+    <string name="screen_register">Регистрация</string>
+
+    <string name="error_network">Нет сетевого подключения.</string>
+    <string name="error_server">Ошибка сервера.</string>
+    <string name="error_email_already_exist">Адрес электронной почты уже существует.</string>
+    <string name="error_password_mismatch">Пароли не совпадают</string>
+
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="name">Имя</string>
+    <string name="register">Регистрация</string>
+    <string name="already_have_account">Уже есть аккаунт?</string>
 </resources>
