@@ -2,7 +2,7 @@ package com.messenger.domain.account
 
 import com.messenger.domain.type.Either
 import com.messenger.domain.type.None
-import com.messenger.domain.type.exception.Failure
+import com.messenger.domain.type.Failure
 
 interface AccountRepository {
     fun login(email: String, password: String): Either<Failure, AccountEntity>

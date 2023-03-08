@@ -4,7 +4,7 @@ import com.messenger.domain.account.AccountEntity
 import com.messenger.domain.account.AccountRepository
 import com.messenger.domain.type.Either
 import com.messenger.domain.type.None
-import com.messenger.domain.type.exception.Failure
+import com.messenger.domain.type.Failure
 import com.messenger.domain.type.flatMap
 import java.util.*
 
@@ -33,12 +33,14 @@ class AccountRepositoryImpl(
 
 
     override fun getCurrentAccount(): Either<Failure, AccountEntity> {
-        throw UnsupportedOperationException("Get account is not supported")
+        return accountCache.getCurrentAccount()
     }
 
 
     override fun updateAccountToken(token: String): Either<Failure, None> {
-        return accountCache.saveToken(token)
+        accountCache.saveToken(token)
+
+        return accountCache.getCurrentAccount().flatMap { accountRemote.updateToken(it.id, token, it.token) }
     }
 
     override fun updateAccountLastSeen(): Either<Failure, None> {

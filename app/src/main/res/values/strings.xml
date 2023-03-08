@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">Messenger</string>
+    <string name="app_name">Чат</string>
 
     <string name="screen_register">Регистрация</string>
+    <string name="screen_login">Авторизация</string>
 
     <string name="error_network">Нет сетевого подключения.</string>
     <string name="error_server">Ошибка сервера.</string>
-    <string name="error_email_already_exist">Адрес электронной почты уже существует.</string>
-    <string name="error_password_mismatch">Пароли не совпадают</string>
+    <string name="error_email_already_exist">Email уже существует.</string>
+    <string name="error_password_mismatch">Пароли не совпадают.</string>
+    <string name="error_auth">Неправильный email или пароль.</string>
+
 
     <string name="email">Email</string>
     <string name="password">Пароль</string>
@@ -14,4 +17,13 @@
     <string name="name">Имя</string>
     <string name="register">Регистрация</string>
     <string name="already_have_account">Уже есть аккаунт?</string>
+    <string name="dont_have_account">Еще нет аккаунта?</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="login">Вход</string>
+    <string name="chats">Чаты</string>
+    <string name="friends">Друзья</string>
+    <string name="add_friend">Пригласить друга</string>
+    <string name="profile">Аккаунт</string>
+    <string name="friend_requests">Входящие приглашения</string>
+    <string name="logout">Выйти</string>
 </resources>

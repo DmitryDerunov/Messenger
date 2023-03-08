@@ -1,38 +1,29 @@
 package com.messenger.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.messenger.R
-import com.messenger.domain.type.exception.Failure
+import com.messenger.domain.type.Failure
 import com.messenger.ui.AppActivity
 import com.messenger.ui.base
 import javax.inject.Inject
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment() : Fragment() {
 
-    abstract val layoutId: Int
 
     open val titleToolbar = R.string.app_name
     open val showToolbar = true
 
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(layoutId, container, false)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -70,5 +61,5 @@ abstract class BaseFragment : Fragment() {
         return vm
     }
 
-    fun close() = parentFragmentManager.popBackStack()
+    fun close() = findNavController().popBackStack()
 }

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Module
 import dagger.Binds
 import dagger.multibindings.IntoMap
-import com.messenger.presentation.AccountViewModel
-import com.messenger.presentation.ViewModelFactory
+import com.messenger.presentation.viewModel.AccountViewModel
+import com.messenger.presentation.viewModel.ViewModelFactory
 
 @Module
 abstract class ViewModelModule {

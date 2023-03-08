@@ -1,4 +1,4 @@
-package com.messenger.presentation
+package com.messenger.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

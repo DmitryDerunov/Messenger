@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/friends_graph"
+        android:title="friends"
+        android:icon="@drawable/baseline_group_black_36"/>
+    <item android:id="@id/chats_graph"
+        android:title="chats"
+        android:icon="@drawable/baseline_chat_black_36"/>
+    <item android:id="@id/profile_graph"
+        android:title="profile"
+        android:icon="@drawable/contact_photo_sample"/>
+</menu>

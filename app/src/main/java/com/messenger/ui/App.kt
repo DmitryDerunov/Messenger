@@ -8,6 +8,9 @@ import com.messenger.di.RemoteModule
 import com.messenger.di.ViewModelModule
 
 import com.messenger.presentation.service.FirebaseService
+import com.messenger.ui.fragment.LoginFragment
+import com.messenger.ui.fragment.TabsFragment
+import com.messenger.ui.fragment.RegisterFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -34,10 +37,12 @@ class App : Application() {
 interface AppComponent {
 
     //activities
-    //fun inject(activity: RegisterActivity)
+    fun inject(appActivity: AppActivity)
 
     //fragments
-    //fun inject(fragment: RegisterFragment)
+    fun inject(fragment: LoginFragment)
+    fun inject(fragment: TabsFragment)
+    fun inject(fragment: RegisterFragment)
 
     //services
     fun inject(service: FirebaseService)

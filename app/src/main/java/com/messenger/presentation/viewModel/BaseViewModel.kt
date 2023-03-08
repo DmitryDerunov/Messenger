@@ -1,8 +1,8 @@
-package com.messenger.presentation
+package com.messenger.presentation.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.messenger.domain.type.exception.Failure
+import com.messenger.domain.type.Failure
 
 abstract class BaseViewModel : ViewModel() {
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Larger blue circle in back -->
+<item>
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="oval"
+        >
+        <stroke
+            android:width="1dip"
+            android:color="@android:color/white"
+            />
+        <!--AC79AD-->
+
+        <solid
+            android:color="@android:color/transparent"
+           />
+        <size
+            android:width="90dp"
+            android:height="90dp"
+            />
+
+
+    </shape>
+</item>
+<!-- Smaller red circle in front -->
+<item android:top="1dp"
+    android:bottom="1dp"
+    android:right="1dp"
+    android:left="1dp">
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="oval"
+        >
+        <stroke
+            android:width="1dip"
+            android:color="@color/colorPrimary"
+            />
+        <solid
+            android:color="@android:color/transparent"
+          />
+        <size
+            android:width="90dp"
+            android:height="90dp"
+            />
+
+    </shape>
+</item>
+</layer-list>

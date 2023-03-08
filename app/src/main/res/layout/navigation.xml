@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/nav_header_padding_top">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivUserImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/contact_photo_sample"
+                    android:background="@drawable/circle_circle"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivUserImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="@dimen/medium_margin"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:lines="1"
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:text="@string/name"
+                        android:textSize="18sp"/>
+
+                <TextView
+                        android:lines="1"
+                        android:id="@+id/tvUserEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/email"/>
+
+                <TextView
+                        android:lines="1"
+                        android:id="@+id/tvUserStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginTop="3dp"
+                        android:text="Status"/>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileContainer"
+                android:background="@android:color/darker_gray"/>
+
+
+        <RelativeLayout
+                android:id="@+id/rlChats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+            <LinearLayout
+                    android:id="@+id/llChats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/imgvChats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/profile"
+                        android:src="@drawable/baseline_chat_black_36"
+                        app:tint="@color/colorPrimary"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/small_margin5"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/chats"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+                android:id="@+id/rlFriendsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+            <LinearLayout
+                    android:id="@+id/llFriendsList"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/imgvFriendsList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/profile"
+                        android:src="@drawable/baseline_group_black_36"
+                        app:tint="@color/colorPrimary"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/small_margin5"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/friends"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/rlAddFriend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginTop="@dimen/medium_margin">
+
+            <LinearLayout
+                    android:id="@+id/llAddFriend"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/imgvAddFriend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/add_friend"
+                        android:src="@drawable/baseline_person_add_black_36"
+                        app:tint="@color/colorPrimary"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/small_margin5"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/add_friend"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/rlRequests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+            <LinearLayout
+                    android:id="@+id/llRequests"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:id="@+id/imgvRequests"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/profile"
+                        android:src="@drawable/baseline_group_add_black_36"
+                        app:tint="@color/colorPrimary"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginStart="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/small_margin5"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/friend_requests"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical" >
+
+        <LinearLayout
+                android:id="@+id/llloginout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:id="@+id/imgvloginout"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/small_margin5"
+                    android:contentDescription="@string/logout"
+                    android:src="@drawable/loginout"
+                    app:tint="@color/colorPrimary"/>
+
+            <TextView
+                    android:id="@+id/txtvloginout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin5"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/logout"
+                    android:textSize="16sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.google.android.material.navigation.NavigationView>
