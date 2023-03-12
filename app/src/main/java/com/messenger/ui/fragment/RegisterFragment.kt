@@ -1,7 +1,9 @@
 package com.messenger.ui.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.messenger.R
 import com.messenger.databinding.FragmentRegisterBinding
@@ -18,14 +20,43 @@ class RegisterFragment : BaseFragment() {
 
     override val titleToolbar = R.string.register
 
-    private lateinit var accountViewModel: AccountViewModel
+    private val accountViewModel: AccountViewModel by lazy { viewModel {  } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
+    }
 
-        accountViewModel = viewModel { }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupBindings()
+        initSubscribes()
+    }
+
+    private fun setupBindings(){
+        binding.apply {
+            btnNewMembership.setOnClickListener {
+                register()
+            }
+
+            btnAlreadyHaveAkk.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+    }
+
+    private fun initSubscribes(){
         accountViewModel.accountData.observe(viewLifecycleOwner){
             handleLogin(it)
         }
@@ -35,19 +66,12 @@ class RegisterFragment : BaseFragment() {
         accountViewModel.registerData.observe(viewLifecycleOwner){
             handleRegister(it)
         }
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.apply {
-            btnNewMembership.setOnClickListener {
-                register()
-            }
-
-            btnAlreadyHaveAkk.setOnClickListener {
-                activity?.finish()
-            }
+        accountViewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it)
+                showProgress()
+            else
+                hideProgress()
         }
     }
 
@@ -74,8 +98,6 @@ class RegisterFragment : BaseFragment() {
         val allValid = validateFields()
 
         if (allValid) {
-            showProgress()
-
             accountViewModel.register(
 
                 binding.etEmail.text.toString(),
@@ -86,7 +108,6 @@ class RegisterFragment : BaseFragment() {
     }
 
     private fun handleLogin(accountEntity: AccountEntity?) {
-        hideProgress()
         findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToNavigationFragment())
     }
 

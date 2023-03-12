@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.messenger.ui.fragment.FriendsFragment"
+        android:name="com.messenger.ui.core.friends.FriendsFragment"
         android:label="FriendsFragment" />
 </navigation>

@@ -20,7 +20,7 @@ class LoginFragment : BaseFragment() {
 
     override val titleToolbar = R.string.screen_login
 
-    private lateinit var accountViewModel: AccountViewModel
+    private val accountViewModel: AccountViewModel by lazy { viewModel {  } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +40,11 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        accountViewModel = viewModel {  }
+        setupBindings()
+        initSubscribes()
+    }
 
-        accountViewModel.failureData.observe(viewLifecycleOwner){
-            handleFailure(it)
-        }
-
-        accountViewModel.accountData.observe(viewLifecycleOwner){
-            renderAccount(it)
-        }
-
+    private fun setupBindings(){
         binding.apply {
             btnLogin.setOnClickListener {
                 validateFields()
@@ -58,6 +53,16 @@ class LoginFragment : BaseFragment() {
             btnRegister.setOnClickListener {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
+        }
+    }
+
+    private fun initSubscribes(){
+        accountViewModel.failureData.observe(viewLifecycleOwner){
+            handleFailure(it)
+        }
+
+        accountViewModel.accountData.observe(viewLifecycleOwner){
+            renderAccount(it)
         }
     }
 
@@ -74,12 +79,10 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun login(email: String, password: String) {
-        showProgress()
         accountViewModel.login(email, password)
     }
 
     private fun renderAccount(account: AccountEntity?) {
-        hideProgress()
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavigationFragment())
     }
 }

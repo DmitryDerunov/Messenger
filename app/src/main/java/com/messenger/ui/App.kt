@@ -8,6 +8,9 @@ import com.messenger.di.RemoteModule
 import com.messenger.di.ViewModelModule
 
 import com.messenger.presentation.service.FirebaseService
+import com.messenger.ui.core.friends.FriendRequestsFragment
+import com.messenger.ui.core.friends.FriendsFragment
+import com.messenger.ui.core.friends.FriendsListFragment
 import com.messenger.ui.fragment.LoginFragment
 import com.messenger.ui.fragment.TabsFragment
 import com.messenger.ui.fragment.RegisterFragment
@@ -43,6 +46,9 @@ interface AppComponent {
     fun inject(fragment: LoginFragment)
     fun inject(fragment: TabsFragment)
     fun inject(fragment: RegisterFragment)
+    fun inject(fragment: FriendRequestsFragment)
+    fun inject(fragment: FriendsFragment)
+    fun inject(fragment: FriendsListFragment)
 
     //services
     fun inject(service: FirebaseService)

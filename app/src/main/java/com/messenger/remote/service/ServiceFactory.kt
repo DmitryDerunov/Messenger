@@ -1,11 +1,14 @@
 package com.messenger.remote.service
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 object ServiceFactory {
     const val BASE_URL = "http://192.168.0.11/rest_api/"
@@ -14,7 +17,10 @@ object ServiceFactory {
         val okHttpClient = makeOkHttpClient(
             makeLoggingInterceptor((isDebug))
         )
-        return makeService(okHttpClient, Gson())
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+        return makeService(okHttpClient, gson)
     }
 
     private fun makeService(okHttpClient: OkHttpClient, gson: Gson): ApiService {
@@ -29,6 +35,12 @@ object ServiceFactory {
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(Interceptor {
+                val newRequest = it.request().newBuilder()
+                    .addHeader("Content-Type", "application/json")
+                    .build()
+                it.proceed(newRequest)
+            })
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()

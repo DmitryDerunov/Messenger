@@ -28,10 +28,10 @@ abstract class BaseFragment() : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        base {
-            if (showToolbar) supportActionBar?.show() else supportActionBar?.hide()
-            supportActionBar?.title = getString(titleToolbar)
-        }
+//        base {
+//            if (showToolbar) supportActionBar?.show() else supportActionBar?.hide()
+//            supportActionBar?.title = getString(titleToolbar)
+//        }
     }
 
     open fun onBackPressed() {}

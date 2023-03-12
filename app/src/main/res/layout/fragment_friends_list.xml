@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="friends list"
+        android:layout_gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/addFriendBtn"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_plus"
+        android:background="@color/md_theme_light_primary"
+        android:layout_gravity="bottom | right"
+        android:layout_width="60dp"
+        android:layout_height="60dp"/>
+</FrameLayout>

@@ -33,8 +33,8 @@ class AppActivity : AppCompatActivity() {
         get() = _binding ?: throw RuntimeException("ActivityLayoutBinding == null")
 
     private var navController: NavController? = null
-    private val topLevelDestinations = setOf(getLoginDestination(), getNavigationDestination())
-    private val mainDestinations = setOf(getLoginDestination(), getNavigationDestination())
+    private val topLevelDestinations = setOf(getLoginDestination(), getNavigationDestination(), getChatsDestination())
+    private val mainDestinations = setOf(getLoginDestination(), getNavigationDestination(), getChatsDestination(), getFriendsnDestination(), getProfileDestination())
 
     var bottomNavigationView: BottomNavigationView? = null
 
@@ -180,6 +180,8 @@ class AppActivity : AppCompatActivity() {
                         .build()
                 getRootNavController().navigate(R.id.action_global_loginFragment, null, options)
             }
+            is Failure.AlreadyFriendError -> showMessage(getString(R.string.error_already_friend))
+            is Failure.AlreadyRequestedFriendError -> showMessage(getString(R.string.error_already_requested_friend))
             else -> {}
         }
     }
@@ -194,6 +196,12 @@ class AppActivity : AppCompatActivity() {
     private fun getNavigationDestination(): Int = R.id.tabsFragment
 
     private fun getMainNavigationGraphId(): Int = R.navigation.main_navigation
+
+    private fun getFriendsnDestination(): Int = R.id.friendsFragment
+
+    private fun getChatsDestination(): Int = R.id.chatsFragment
+
+    private fun getProfileDestination(): Int = R.id.profileFragment
 }
 
 
