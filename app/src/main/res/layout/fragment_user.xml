@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:isScrollContainer="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frameimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/small_margin5"
+                android:background="@drawable/circle_circle">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgPhoto"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:src="@drawable/ic_account_circle"
+                    android:visibility="visible"/>
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/email_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/email"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/name_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/name"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:id="@+id/tvHintStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/status_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/status"
+                android:maxLength="200"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

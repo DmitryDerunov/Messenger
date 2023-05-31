@@ -20,7 +20,7 @@ class RegisterFragment : BaseFragment() {
 
     override val titleToolbar = R.string.register
 
-    private val accountViewModel: AccountViewModel by lazy { viewModel {  } }
+    private val accountViewModel: AccountViewModel by lazy { viewModel () }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

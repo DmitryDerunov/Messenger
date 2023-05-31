@@ -1,18 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whatever="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rlActions"
+        android:background="@color/white"
+        android:isScrollContainer="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frameimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/small_margin5"
+                android:background="@drawable/circle_circle">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgPhoto"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_account_circle"
+                    android:tint="@color/grey"
+                    android:visibility="visible"/>
+
+                <FrameLayout
+                    android:id="@+id/groupProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:src="@color/translucent"
+                        android:visibility="visible"/>
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/progressBarTint"
+                        android:indeterminateTint="@color/progressBarTint"
+                        android:indeterminateTintMode="src_in"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/email_colon"
+                android:layout_marginLeft="4dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <com.andreabaccega.widget.FormEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                whatever:testType="email"
+                whatever:testErrorString="@string/error_email_address_not_valid"
+                whatever:emptyErrorString="@string/error_field_must_not_be_empty"
+                android:hint="@string/email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="4dp"
+                android:text="@string/name_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <com.andreabaccega.widget.FormEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                whatever:emptyErrorString="@string/error_field_must_not_be_empty"
+                android:hint="@string/name"
+                android:imeOptions="actionNext"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="4dp"
+                android:padding="@dimen/extra_small_padding"
+                android:text="@string/status_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <com.andreabaccega.widget.FormEditText
+                android:id="@+id/etStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/status"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                whatever:emptyErrorString="@string/error_field_must_not_be_empty"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="4dp"
+                android:text="@string/current_password_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <com.andreabaccega.widget.FormEditText
+                android:id="@+id/etCurrentPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/current_password"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="4dp"
+                android:text="@string/new_password_colon"
+                android:textStyle="bold"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/normal_text_size"/>
+
+            <com.andreabaccega.widget.FormEditText
+                android:id="@+id/etNewPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:hint="@string/new_password"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:textColor="@color/darkGrey"
+                android:textColorHint="@color/grey"
+                android:textSize="@dimen/normal_text_size"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rlActions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="56sp"
-        android:textColor="@color/grey"
-        android:text="Profile"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <Button
+                style="@style/Button.Primary"
+                android:id="@+id/btnEdit"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shadowColor="#E3BFE3"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:textAllCaps="false"
+                android:shadowRadius="5"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_centerInParent="true"
+                android:text="@string/update_account"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

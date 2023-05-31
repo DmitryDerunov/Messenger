@@ -2,13 +2,10 @@ package com.messenger.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.messenger.presentation.viewModel.*
 import dagger.Module
 import dagger.Binds
 import dagger.multibindings.IntoMap
-import com.messenger.presentation.viewModel.AccountViewModel
-import com.messenger.presentation.viewModel.FriendsRequestsViewModel
-import com.messenger.presentation.viewModel.FriendsViewModel
-import com.messenger.presentation.viewModel.ViewModelFactory
 
 @Module
 abstract class ViewModelModule {
@@ -30,4 +27,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FriendsRequestsViewModel::class)
     abstract fun bindFriendsRequestsViewModel(friendsRequestsViewModel: FriendsRequestsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MediaViewModel::class)
+    abstract fun bindMediaViewModel(mediaViewModel: MediaViewModel): ViewModel
 }

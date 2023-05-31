@@ -1,7 +1,6 @@
-package com.messenger.ui.core.friends
+package com.messenger.ui.core.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.messenger.R
 import com.messenger.databinding.ItemFriendRequestBinding
 import com.messenger.domain.friends.FriendEntity
-import com.messenger.ui.core.BaseAdapter
+import com.messenger.ui.core.GlideHelper
 
 class FriendRequestsAdapter(
+    private val onItemCLick: (FriendEntity) -> Unit,
     private val onAcceptRequestAction: (FriendEntity) -> Unit,
     private val onDeclineRequestAction: (FriendEntity) -> Unit
 ) : ListAdapter<FriendEntity, FriendRequestsAdapter.FriendRequestViewHolder>(
@@ -21,7 +21,7 @@ class FriendRequestsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendRequestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemFriendRequestBinding.inflate(inflater, parent, false)
-        return FriendRequestViewHolder(itemBinding, onAcceptRequestAction, onDeclineRequestAction)
+        return FriendRequestViewHolder(itemBinding, onItemCLick, onAcceptRequestAction, onDeclineRequestAction)
     }
 
     override fun onBindViewHolder(holder: FriendRequestViewHolder, position: Int) {
@@ -30,6 +30,7 @@ class FriendRequestsAdapter(
 
     class FriendRequestViewHolder(
         private val binding: ItemFriendRequestBinding,
+        private val onItemCLick: (FriendEntity) -> Unit,
         private val onAcceptRequestAction: (FriendEntity) -> Unit,
         private val onDeclineRequestAction: (FriendEntity) -> Unit
     ) :
@@ -49,10 +50,15 @@ class FriendRequestsAdapter(
                     onDeclineRequestAction(it)
                 }
             }
+
+            binding.root.setOnClickListener {
+                friend?.let(onItemCLick)
+            }
         }
 
         fun bind(friend: FriendEntity) {
             this.friend = friend
+            GlideHelper.loadImage(binding.root.context, friend.image, binding.imgPhoto, R.drawable.ic_account_circle)
             binding.tvName.text = friend.name
         }
     }

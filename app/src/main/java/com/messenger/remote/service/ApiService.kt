@@ -21,6 +21,7 @@ interface ApiService {
         const val DELETE_FRIEND = "deleteFriend.php"
         const val GET_FRIENDS = "getContactsByUser.php"
         const val GET_FRIEND_REQUESTS = "getFriendRequestsByUser.php"
+        const val EDIT_USER = "editUser.php"
 
         //params
         const val PARAM_EMAIL = "email"
@@ -35,6 +36,10 @@ interface ApiService {
         const val PARAM_STATUS = "status"
         const val PARAM_REQUEST_USER = "request_user"
         const val PARAM_APPROVED_USER = "approved_user"
+        const val PARAM_IMAGE_NEW = "image_new"
+        const val PARAM_IMAGE_NEW_NAME = "image_new_name"
+        const val PARAM_IMAGE_UPLOADED = "image_uploaded"
+        const val PARAM_IMAGE = "image"
     }
 
     @FormUrlEncoded
@@ -72,4 +77,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST(GET_FRIEND_REQUESTS)
     fun getFriendRequests(@FieldMap params: Map<String, String>): Call<GetFriendRequestsResponse>
+
+    @FormUrlEncoded
+    @POST(EDIT_USER)
+    fun editUser(@FieldMap params: Map<String, String>): Call<AuthResponse>
 }

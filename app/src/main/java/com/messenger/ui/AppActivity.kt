@@ -2,6 +2,7 @@ package com.messenger.ui
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -23,6 +24,7 @@ import com.messenger.R
 import com.messenger.databinding.ActivityLayoutBinding
 import com.messenger.domain.type.Failure
 import com.messenger.presentation.Authenticator
+import com.messenger.ui.core.PermissionManager
 import com.messenger.ui.fragment.TabsFragment
 import javax.inject.Inject
 
@@ -43,6 +45,9 @@ class AppActivity : AppCompatActivity() {
 
     @Inject
     lateinit var authentificator: Authenticator
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +75,23 @@ class AppActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
+        //todo
         if (isStartDestination(navController?.currentDestination)) {
             super.onBackPressed()
         } else {
             navController?.popBackStack()
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //todo
+        //fragment.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //permissionManager.requestObject?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
 
@@ -182,6 +199,7 @@ class AppActivity : AppCompatActivity() {
             }
             is Failure.AlreadyFriendError -> showMessage(getString(R.string.error_already_friend))
             is Failure.AlreadyRequestedFriendError -> showMessage(getString(R.string.error_already_requested_friend))
+            is Failure.FilePickError -> showMessage(getString(R.string.error_picking_file))
             else -> {}
         }
     }

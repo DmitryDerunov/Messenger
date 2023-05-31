@@ -1,7 +1,17 @@
 package com.messenger.presentation.service
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.media.RingtoneManager
+import android.os.Build
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.messaging.RemoteMessage
 import com.messenger.R
 import com.messenger.domain.friends.FriendEntity
@@ -18,6 +28,34 @@ class NotificationHelper @Inject constructor(val context: Context) {
         const val TYPE_ADD_FRIEND = "addFriend"
         const val TYPE_APPROVED_FRIEND = "approveFriendRequest"
         const val TYPE_CANCELLED_FRIEND_REQUEST = "cancelFriendRequest"
+
+        const val notificationId = 110
+    }
+
+    private val mManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    init {
+        createChannels()
+    }
+
+    private fun createChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // create android channel
+            val androidChannel = NotificationChannel(
+                context.packageName,
+                "${context.packageName}.notification_chanel", NotificationManager.IMPORTANCE_DEFAULT
+            )
+            // Sets whether notifications posted to this channel should display notification lights
+            androidChannel.enableLights(true)
+            // Sets whether notification posted to this channel should vibrate.
+            androidChannel.enableVibration(true)
+            // Sets the notification light color for notifications posted to this channel
+            androidChannel.lightColor = Color.GREEN
+            // Sets whether notifications posted to this channel appear on the lockscreen or not
+            androidChannel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+
+            mManager.createNotificationChannel(androidChannel)
+        }
     }
 
     fun sendNotification(remoteMessage: RemoteMessage?) {
@@ -39,20 +77,41 @@ class NotificationHelper @Inject constructor(val context: Context) {
     private fun sendAddFriendNotification(jsonMessage: JSONObject) {
         val friend = parseFriend(jsonMessage)
 
-        showMessage("${friend.name} ${context.getString(R.string.wants_add_as_friend)}")
+//        val intent = Intent(context, HomeActivity::class.java)
+//        intent.putExtra("type", TYPE_ADD_FRIEND)
+
+//        createNotification(
+//            context.getString(R.string.friend_request),
+//            "${friend.name} ${context.getString(R.string.wants_add_as_friend)}",
+//            intent
+//        )
     }
 
 
     private fun sendApprovedFriendNotification(jsonMessage: JSONObject) {
         val friend = parseFriend(jsonMessage)
 
-        showMessage("${friend.name} ${context.getString(R.string.approved_friend_request)}")
+//        val intent = Intent(context, HomeActivity::class.java)
+//        intent.putExtra("type", TYPE_APPROVED_FRIEND)
+//
+//        createNotification(
+//            context.getString(R.string.friend_request_approved),
+//            "${friend.name} ${context.getString(R.string.approved_friend_request)}",
+//            intent
+//        )
     }
 
     private fun sendCancelledFriendNotification(jsonMessage: JSONObject) {
         val friend = parseFriend(jsonMessage)
 
-        showMessage("${friend.name} ${context.getString(R.string.cancelled_friend_request)}")
+//        val intent = Intent(context, HomeActivity::class.java)
+//        intent.putExtra("type", TYPE_CANCELLED_FRIEND_REQUEST)
+//
+//        createNotification(
+//            context.getString(R.string.friend_request_cancelled),
+//            "${friend.name} ${context.getString(R.string.cancelled_friend_request)}",
+//            intent
+//        )
     }
 
 
@@ -75,8 +134,26 @@ class NotificationHelper @Inject constructor(val context: Context) {
         return FriendEntity(id, name, email, friendsId, status, image)
     }
 
-    private fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    private fun createNotification(title: String, message: String, intent: Intent) {
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        intent.action = "notification $notificationId"
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        val contentIntent = PendingIntent.getActivity(
+            context, 0,
+            intent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val mBuilder = NotificationCompat.Builder(
+            context, context.applicationContext.packageName
+        )
+            .setSmallIcon(R.drawable.ic_stat_name)
+            .setContentTitle(title)
+            .setSound(defaultSoundUri)
+            .setAutoCancel(true)
+            .setContentText(message)
+        mBuilder.setContentIntent(contentIntent)
+        mManager.notify(notificationId, mBuilder.build())
     }
 
 }

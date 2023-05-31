@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.messenger.R
 import com.messenger.databinding.FragmentFriendsBinding
@@ -18,16 +19,14 @@ import com.messenger.ui.fragment.BaseFragment
 class FriendsListFragment : BaseFragment() {
 
     private val viewAdapter by lazy {
-        FriendsListAdapter {
-            showDeleteFriendDialog(it)
-        }
+        FriendsListAdapter(::showUser, ::showDeleteFriendDialog)
     }
 
     private var _binding: FragmentFriendsListBinding? = null
     private val binding: FragmentFriendsListBinding
         get() = _binding ?: throw RuntimeException("FragmentNavigationBinding == null")
 
-    private val friendsViewModel: FriendsViewModel by lazy { viewModel {} }
+    private val friendsViewModel: FriendsViewModel by lazy { viewModel () }
 
     override val titleToolbar = R.string.screen_friends
 
@@ -102,6 +101,10 @@ class FriendsListFragment : BaseFragment() {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
         }
+    }
+
+    private fun showUser(friend: FriendEntity){
+        findNavController().navigate(FriendsFragmentDirections.actionFriendsFragmentToUserFragment())
     }
 
 

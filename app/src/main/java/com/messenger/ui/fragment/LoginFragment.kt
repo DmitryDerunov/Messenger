@@ -20,7 +20,7 @@ class LoginFragment : BaseFragment() {
 
     override val titleToolbar = R.string.screen_login
 
-    private val accountViewModel: AccountViewModel by lazy { viewModel {  } }
+    private val accountViewModel: AccountViewModel by lazy { viewModel () }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

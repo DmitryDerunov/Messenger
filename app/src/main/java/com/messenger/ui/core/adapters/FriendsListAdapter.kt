@@ -11,15 +11,16 @@ import com.messenger.databinding.ItemFriendBinding
 import com.messenger.databinding.ItemFriendRequestBinding
 import com.messenger.domain.friends.FriendEntity
 import com.messenger.ui.core.BaseAdapter
+import com.messenger.ui.core.GlideHelper
 
-class FriendsListAdapter(private val onDeleteItemCLick: (FriendEntity) -> Unit) :
+class FriendsListAdapter(private val onItemCLick: (FriendEntity) -> Unit, private val onDeleteItemCLick: (FriendEntity) -> Unit) :
     ListAdapter<FriendEntity, FriendsListAdapter.FriendViewHolder>(FriendsDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemFriendBinding.inflate(inflater, parent, false)
-        return FriendViewHolder(itemBinding, onDeleteItemCLick)
+        return FriendViewHolder(itemBinding, onItemCLick, onDeleteItemCLick)
     }
 
     override fun onBindViewHolder(holder: FriendViewHolder, position: Int) {
@@ -29,6 +30,7 @@ class FriendsListAdapter(private val onDeleteItemCLick: (FriendEntity) -> Unit) 
 
     class FriendViewHolder(
         private val binding: ItemFriendBinding,
+        private val onItemCLick: (FriendEntity) -> Unit,
         private val onDeleteItemCLick: (FriendEntity) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -41,12 +43,22 @@ class FriendsListAdapter(private val onDeleteItemCLick: (FriendEntity) -> Unit) 
                     onDeleteItemCLick(it)
                 }
             }
+            binding.root.setOnClickListener {
+                friend?.let{
+                    onItemCLick(it)
+                }
+            }
         }
 
         fun bind(friend: FriendEntity) {
             this.friend = friend
             binding.tvName.text = friend.name
             binding.tvStatus.text = friend.status
+            GlideHelper.loadImage(binding.root.context, friend.image, binding.imgPhoto, R.drawable.ic_account_circle)
+            binding.tvName.text = friend.name
+            binding.tvStatus.text = friend.status
+
+            binding.tvStatus.visibility = if (friend.status.isNotEmpty()) View.VISIBLE else View.GONE
         }
     }
 }

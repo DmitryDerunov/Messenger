@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/friendsFragment"
         android:name="com.messenger.ui.core.friends.FriendsFragment"
-        android:label="FriendsFragment" />
+        android:label="FriendsFragment" >
+        <action
+            android:id="@+id/action_friendsFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.messenger.ui.user.UserFragment"
+        android:label="UserFragment" />
 </navigation>

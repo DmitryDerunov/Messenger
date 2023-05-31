@@ -24,7 +24,7 @@ class FriendsFragment : BaseFragment() {
     private val binding: FragmentFriendsBinding
         get() = _binding ?: throw RuntimeException("FragmentNavigationBinding == null")
 
-    private val friendsViewModel: FriendsViewModel by lazy { viewModel {} }
+    private val friendsViewModel: FriendsViewModel by lazy { viewModel () }
 
     override val titleToolbar = R.string.screen_friends
 

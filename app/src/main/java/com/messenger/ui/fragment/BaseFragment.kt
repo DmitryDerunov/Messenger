@@ -55,9 +55,8 @@ abstract class BaseFragment() : Fragment() {
     }
 
 
-    inline fun <reified T : ViewModel> viewModel(body: T.() -> Unit): T {
+    inline fun <reified T : ViewModel> viewModel(): T {
         val vm = ViewModelProvider(this, viewModelFactory)[T::class.java]
-        vm.body()
         return vm
     }
 

@@ -4,24 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.messenger.databinding.FragmentFriendsRequestsBinding
 import com.messenger.domain.friends.FriendEntity
 import com.messenger.domain.type.None
 import com.messenger.presentation.viewModel.FriendsRequestsViewModel
-import com.messenger.presentation.viewModel.FriendsViewModel
 import com.messenger.ui.App
-import com.messenger.ui.core.friends.FriendRequestsAdapter
+import com.messenger.ui.core.adapters.FriendRequestsAdapter
 import com.messenger.ui.fragment.BaseFragment
 
 
 class FriendRequestsFragment : BaseFragment() {
 
     private val viewAdapter by lazy {
-        FriendRequestsAdapter(::approveFriend, ::cancelFriend)
+        FriendRequestsAdapter(::showUser, ::approveFriend, ::cancelFriend)
     }
 
-    private val friendsViewModel: FriendsRequestsViewModel by lazy { viewModel {} }
+    private val friendsViewModel: FriendsRequestsViewModel by lazy { viewModel () }
 
     private var _bindings: FragmentFriendsRequestsBinding? = null
     val bindings: FragmentFriendsRequestsBinding
@@ -66,7 +66,7 @@ class FriendRequestsFragment : BaseFragment() {
 
     private fun initSubscribes(){
         friendsViewModel.isRefreshing.observe(viewLifecycleOwner) {
-            bindings.swipeRefresh.isRefreshing
+            bindings.swipeRefresh.isRefreshing = it
         }
 
         friendsViewModel.apply {
@@ -91,6 +91,10 @@ class FriendRequestsFragment : BaseFragment() {
         }
     }
 
+    private fun showUser(friend: FriendEntity){
+        findNavController().navigate(FriendsFragmentDirections.actionFriendsFragmentToUserFragment())
+    }
+
     private fun approveFriend(friend: FriendEntity){
         friendsViewModel.approveFriend(friend)
     }
@@ -99,10 +103,6 @@ class FriendRequestsFragment : BaseFragment() {
         friendsViewModel.cancelFriend(friend)
     }
 
-    override fun onResume() {
-        super.onResume()
-        friendsViewModel.getFriendRequests()
-    }
 
     private fun handleFriendRequests(requests: List<FriendEntity>?) {
         if (requests != null) {

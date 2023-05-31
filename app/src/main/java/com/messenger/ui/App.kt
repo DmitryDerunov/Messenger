@@ -12,8 +12,10 @@ import com.messenger.ui.core.friends.FriendRequestsFragment
 import com.messenger.ui.core.friends.FriendsFragment
 import com.messenger.ui.core.friends.FriendsListFragment
 import com.messenger.ui.fragment.LoginFragment
+import com.messenger.ui.fragment.ProfileFragment
 import com.messenger.ui.fragment.TabsFragment
 import com.messenger.ui.fragment.RegisterFragment
+import com.messenger.ui.user.UserFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -49,6 +51,8 @@ interface AppComponent {
     fun inject(fragment: FriendRequestsFragment)
     fun inject(fragment: FriendsFragment)
     fun inject(fragment: FriendsListFragment)
+    fun inject(fragment: ProfileFragment)
+    fun inject(fragment: UserFragment)
 
     //services
     fun inject(service: FirebaseService)
